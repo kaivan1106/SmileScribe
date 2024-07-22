@@ -87,6 +87,7 @@ const Appointment = () => {
       const response = await axios.post('http://localhost:8000/appointment', appointmentData);
       console.log('Appointment created:', response.data);
       alert("Appointment Succeed");
+      navigate('/');
       // navigate('/success'); // Example: navigating to a success page
     } catch (error) {
       console.error('Error creating appointment:', error);
