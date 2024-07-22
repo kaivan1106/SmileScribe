@@ -488,7 +488,7 @@ app.get('/appointments', (req, res) => {
 
 app.get('/appointments/:dentistID', (req, res) => {
   const dentistID = parseInt(req.params.dentistID, 10);
-  const query = 'SELECT p.FirstName AS PatientFirstName, p.LastName AS PatientLastName, d.FirstName AS DentistFirstName, d.LastName AS DentistLastName, c.chargeName,a.AppointmentID, a.AppointmentDate, a.StartTime, a.EndTime, a.Status, a.ProblemDescription, a.Notes FROM appointments a JOIN patients p ON a.PatientID = p.PatientID JOIN dentists d ON a.DentistID = d.DentistID JOIN charges c ON a.chargeID = c.chargeID WHERE a.DentistID = ?';
+  const query = 'SELECT p.FirstName AS PatientFirstName, p.LastName AS PatientLastName, d.FirstName AS DentistFirstName, d.LastName AS DentistLastName, c.chargeName,a.AppointmentID, a.AppointmentDate, a.StartTime, a.EndTime, a.Status, a.ProblemDescription, a.Notes FROM appointments a JOIN patients p ON a.PatientID = p.PatientID JOIN dentists d ON a.DentistID = d.DentistID JOIN charges c ON a.chargeID = c.chargeID WHERE a.DentistID = ? AND a.Status = "pending"';
   connection.query(query, [dentistID], (error, results) => {
       if (error) {
           res.status(500).json({ message: 'Error fetching appointments', error });
